@@ -3,9 +3,10 @@ const app = express();
 const connect = require("./connect")
 const port = process.env.PORT || 4000;
 const Product = require("./schemas/Product")
+const cors = require("cors")
 
 app.use(express.json());
-
+app.use(cors())
 app.get("/",(req,res)=>{
     res.send("conectado")
 })
