@@ -39,9 +39,24 @@ app.get("/products", async (req, res) => {
   }
 });
 
+app.get("/products/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+
+    res.status(200).send({ product });
+  } catch (error) {
+    res.status(500).send({ message: "Error retrieving product", error });
+  }
+});
+
 app.listen(port,(req,res)=>{
    connect()
    console.log(`http://localhost:${port}`)
 })
+
 
 
